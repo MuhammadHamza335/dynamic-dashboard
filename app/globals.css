@@ -25,3 +25,6 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+.bold-header {
+  font-weight: bold;
+}
