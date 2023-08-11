@@ -30,16 +30,18 @@ const TableData = () => {
     },
   ];
   return (
-    <Box sx={{ height: 300, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-        }}
-      />
-    </Box>
+    <div className="wrapper">
+      <Box sx={{ height: 300, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          sx={{
+            boxShadow: 2,
+            border: 2,
+          }}
+        />
+      </Box>
+    </div>
   );
 };
 
