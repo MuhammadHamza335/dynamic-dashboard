@@ -2,7 +2,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const Welcome = () => {
   return (
-    <div className="flex justify-between bg-white px-3 flex-wrap">
+    <div className="flex justify-between bg-white px-3 flex-wrap ">
       <div className="text-black font-bold text-lg my-5">Welcome User!</div>
       <div className=" flex space-x-4 flex-wrap">
         <div className="my-1 flex flex-col ">

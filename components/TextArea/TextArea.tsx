@@ -14,7 +14,7 @@ const TextArea: React.FC<Props> = ({
   totalPrice,
 }) => {
   return (
-    <div className="wrapper" style={{ width: "400px" }}>
+    <div className="flex flex-col bg-white p-4 border border-slate-50">
       <div className="flex items-end">
         <p className="font-bold text-black">{title}</p>
         <p className="text-xs ml-2 text-black">({number})</p>

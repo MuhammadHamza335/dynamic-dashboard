@@ -13,7 +13,7 @@ const ChartPie: React.FC<ChartPieProps> = ({ width }) => {
   ];
 
   const size = {
-    width: 400,
+    width: 350,
     height: 200,
   };
   const buttonNames = ["LAST WEEK", "LAST TWO WEEKS", "LAST MONTH"];
@@ -23,24 +23,25 @@ const ChartPie: React.FC<ChartPieProps> = ({ width }) => {
       subtitle="Store: Apple Store"
       date="11 Aug 2023"
       buttonNa={buttonNames}
-      Width={width ?? 400}
     >
-      <PieChart
-        series={[
-          {
-            arcLabel: (item) => ` ${item.value}%`,
-            // arcLabelMinAngle: 45,
-            data,
-          },
-        ]}
-        sx={{
-          [`& .${pieArcLabelClasses.root}`]: {
-            fill: "white",
-            fontWeight: "bold",
-          },
-        }}
-        {...size}
-      />
+      <div className="w-full flex justify-center">
+        <PieChart
+          series={[
+            {
+              arcLabel: (item) => ` ${item.value}%`,
+              // arcLabelMinAngle: 45,
+              data,
+            },
+          ]}
+          sx={{
+            [`& .${pieArcLabelClasses.root}`]: {
+              fill: "white",
+              fontWeight: "bold",
+            },
+          }}
+          {...size}
+        />
+      </div>
     </Wrapper>
   );
 };

@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Wrapper from "../Wrapper/Wrapper";
 function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number; width?: number }
+  props: CircularProgressProps & { value: number }
 ) {
-  const { value, width } = props;
+  const { value } = props;
   const buttonNames = ["TODAY", "THIS MONTH", "LAST MONTH"];
 
   return (
@@ -17,7 +17,6 @@ function CircularProgressWithLabel(
       subtitle="Store: Apple Store"
       date="11 Aug 2023"
       buttonNa={buttonNames}
-      Width={width ?? 400}
     >
       <div className="flex justify-center">
         <div className="relative inline-flex">

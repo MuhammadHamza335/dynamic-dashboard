@@ -8,12 +8,12 @@ interface ProfileInfoProps {
 }
 
 const ProfileInfo: React.FC<ProfileInfoProps> = ({ width }) => {
-  const containerWidth = width ?? 400;
+  //   const containerWidth = width ?? 300;
 
   return (
     <div
       className={`flex flex-col bg-white text-black px-3 pb-3`}
-      style={{ width: `${containerWidth}px` }}
+      //   style={{ width: `${containerWidth}px` }}
     >
       <Image src={Logo} width={170} height={100} alt="Logo" />
       <p className="font-bold text-black">Store Profile</p>

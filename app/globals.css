@@ -32,7 +32,6 @@ body {
   font-weight: bold;
 }
 .wrapper {
-  background-color: white;
   padding: 20px;
   border: 1px rgb(155, 3, 3);
   display: inline-block; /* Only take the width and height of its content */

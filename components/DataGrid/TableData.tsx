@@ -55,21 +55,22 @@ const TableData = () => {
       renderCell: (params) => (
         <div className="text-cyan-500">{params.value}</div>
       ),
-      width: 150,
+      flex: 1, // Set flex property to distribute space evenly
     },
     {
       field: "col2",
       renderHeader: () => <strong>{"Pick up Time"}</strong>,
-      width: 150,
+      flex: 1,
     },
     {
       field: "col3",
       renderHeader: () => <strong>{"Assign To "}</strong>,
+      flex: 1,
     },
     {
       field: "col4",
       renderHeader: () => <strong>{"Customer"}</strong>,
-      width: 150,
+      flex: 1,
     },
     {
       field: "col5",
@@ -92,12 +93,13 @@ const TableData = () => {
         return <div className={cellClasses}>{params.value}</div>;
       },
       width: 150,
+      flex: 1,
     },
   ];
+
   return (
-    <div className="wrapper">
+    <div className="bg-white">
       <div className="flex items-center bg-slate-100  justify-between ">
-        {/* <p className="font-bold text-black text-lg">Ticket</p> */}
         <ButtonGroup buttons={buttonsTitle} isLarge={true} />
         <ButtonGroup buttons={buttonNa} />
       </div>
