@@ -3,22 +3,12 @@ import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import { useState } from "react";
-import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Wrapper from "../Wrapper/Wrapper";
 function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number }
+  props: CircularProgressProps & { value: number; width?: number }
 ) {
-  const { value } = props;
-
-  // Calculate the color based on the completion value
-  const getColor = (value: number) => {
-    if (value === 0) {
-      return "rgba(127, 0, 0, 0.1)"; // Gray for 0% completion
-    }
-    return "primary.main"; // Use the primary color for completion
-  };
+  const { value, width } = props;
   const buttonNames = ["TODAY", "THIS MONTH", "LAST MONTH"];
 
   return (
@@ -27,6 +17,7 @@ function CircularProgressWithLabel(
       subtitle="Store: Apple Store"
       date="11 Aug 2023"
       buttonNa={buttonNames}
+      Width={width ?? 400}
     >
       <div className="flex justify-center">
         <div className="relative inline-flex">
@@ -42,10 +33,14 @@ function CircularProgressWithLabel(
             value={value}
             size={190}
             thickness={7}
-            className="text-opacity-10 absolute left-0"
+            className=" text-opacity-10 absolute left-0"
           />
           <div className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center">
-            <Typography variant="caption" component="div" color="text.primary">
+            <Typography
+              variant="caption"
+              component="div"
+              className="text-4xl text-blue-500 font-bold"
+            >
               {`${Math.round(value)}%`}
             </Typography>
           </div>

@@ -1,8 +1,10 @@
 "use client";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
-import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Wrapper from "../Wrapper/Wrapper";
-export default function ChartPie() {
+interface ChartPieProps {
+  width?: number;
+}
+const ChartPie: React.FC<ChartPieProps> = ({ width }) => {
   const data = [
     { value: 5, label: "Alpha" },
     { value: 10, label: "Beta" },
@@ -21,6 +23,7 @@ export default function ChartPie() {
       subtitle="Store: Apple Store"
       date="11 Aug 2023"
       buttonNa={buttonNames}
+      Width={width ?? 400}
     >
       <PieChart
         series={[
@@ -40,4 +43,5 @@ export default function ChartPie() {
       />
     </Wrapper>
   );
-}
+};
+export default ChartPie;

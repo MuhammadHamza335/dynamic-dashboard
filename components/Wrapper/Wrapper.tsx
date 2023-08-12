@@ -7,28 +7,50 @@ interface WrapperProps {
   date: string;
   buttonNa: string[];
   children: ReactNode;
+  Width: number;
 }
-const button = ["LAST WEEK", "LAST TWO WEEKS", "LAST MONTH"];
+
 const Wrapper: React.FC<WrapperProps> = ({
   title,
   subtitle,
   date,
   buttonNa,
   children,
+  Width,
 }) => {
+  const isWideScreen = Width > 600;
+
   return (
-    <div className="inline-block">
+    <div className="inline-block" style={{ width: `${Width}px` }}>
       <div className="flex items-start bg-slate-100 py-2 px-5">
         <p className="font-bold text-black text-lg">{title}</p>
       </div>
-      <div className="wrapper">
-        <ButtonGroup buttons={buttonNa} />
-        <div className="h-0.5 bg-gray-200 my-2"></div>
-        {subtitle ? (
-          <p className="font-bold text-black mt-3">{subtitle}</p>
-        ) : null}
-
-        <p className="text-lg text-gray-500">{date}</p>
+      <div
+        className={`wrapper ${isWideScreen ? "flex" : "block"}`}
+        style={{ width: `${Width}px` }}
+      >
+        {Width > 600 ? (
+          <>
+            <div className="flex justify-between">
+              {subtitle ? (
+                <p className="font-bold text-black mt-3">{subtitle}</p>
+              ) : null}
+              <p className="text-lg text-gray-500">{date}</p>
+              <ButtonGroup buttons={buttonNa} />
+            </div>
+          </>
+        ) : (
+          <>
+            <ButtonGroup buttons={buttonNa} />
+            <div className="h-0.5 bg-gray-200 my-2"></div>
+            <div>
+              {subtitle ? (
+                <p className="font-bold text-black mt-3">{subtitle}</p>
+              ) : null}
+              <p className="text-lg text-gray-500">{date}</p>
+            </div>
+          </>
+        )}
         {children}
       </div>
     </div>
