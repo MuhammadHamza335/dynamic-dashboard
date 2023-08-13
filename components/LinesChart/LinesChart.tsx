@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { LineChart } from "@mui/x-charts/LineChart";
