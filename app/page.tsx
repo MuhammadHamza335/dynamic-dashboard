@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
       height: 6,
       priority: 4,
       title: "SALES ",
-      url: "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716",
+      url: "https://run.mocky.io/v3/38347da1-086b-4d59-b272-1afee2396c1f",
     },
     {
       type: "TableData",
