@@ -111,7 +111,6 @@ const Dashboard: React.FC = () => {
       title: "Sales",
       url: "",
     },
-    // ... define other widgets here
   ];
 
   const initialLayout: GridLayout.Layout[] = widgetConfig.map((widget) => ({

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { navbarData } from "./NavbarData";
 import Link from "next/link";
+import { AiOutlineMenu } from "react-icons/ai";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -11,12 +12,10 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full bg-slate-500 items-center flex p-4 z-10">
       <div className="flex justify-between items-center w-full flex-wrap md:flex-nowrap">
-        <button
-          className="flex justify-end md:hidden ring-1 ring-black rounded"
+        <AiOutlineMenu
+          className="flex justify-end md:hidden cursor-pointer w-7 h-7"
           onClick={showNav}
-        >
-          <i className="fas fa-bars text-white w-9 h-9 flex justify-center items-center hover:text-black"></i>
-        </button>
+        />
 
         <ul
           className={`${
