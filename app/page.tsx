@@ -10,6 +10,8 @@ import ProfileInfo from "@/components/Profile/ProfileInfo";
 import TableData from "@/components/DataGrid/TableData";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import TextSection from "@/components/TextArea/TextSection";
+import { LineChart } from "@mui/x-charts";
+import LinesChartWithElements from "@/components/LinesChart/LinesChart";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface WidgetConfig {
@@ -66,9 +68,20 @@ const Dashboard: React.FC = () => {
       url: "https://run.mocky.io/v3/9b974211-a383-4518-9f88-f3b737e9ed5f",
     },
     {
-      type: "TableData",
+      type: "LinesChartWithElements",
       order: 2,
       col: 7,
+      row: 0,
+      width: 12,
+      height: 6,
+      priority: 4,
+      title: "SALES ",
+      url: "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716",
+    },
+    {
+      type: "TableData",
+      order: 2,
+      col: 13,
       row: 0,
       width: 12,
       height: 9,
@@ -122,6 +135,7 @@ const Dashboard: React.FC = () => {
     Welcome: Welcome,
     TextSection: TextSection,
     ChartPie: ChartPie,
+    LinesChartWithElements: LinesChartWithElements,
     ProfileInfo: ProfileInfo,
     TableData: TableData,
     CircularWithValueLabel: CircularWithValueLabel,
