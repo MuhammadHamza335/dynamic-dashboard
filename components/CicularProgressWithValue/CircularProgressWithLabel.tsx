@@ -10,6 +10,10 @@ import Loader from "../Loader/Loader";
 //   date: string;
 //   data: PieData[];
 // }
+interface ProgressCicularProps {
+  title: string;
+  url?: string;
+}
 const buttonNamesURL: Record<string, string> = {
   TODAY: "https://run.mocky.io/v3/51dca2cc-5b17-4ad3-aabf-90dc7138a193",
   "THIS MONTH": "https://run.mocky.io/v3/4e23786c-39c1-4d6a-a05c-97de60edba3b",
@@ -17,7 +21,10 @@ const buttonNamesURL: Record<string, string> = {
 };
 const buttonNames = ["TODAY", "THIS MONTH", "LAST MONTH"];
 
-export default function CircularProgressWithLabel() {
+const CircularProgressWithLabel: React.FC<ProgressCicularProps> = ({
+  title,
+  url,
+}) => {
   const [activeButton, setActiveButton] = useState<string>(buttonNames[0]);
   const buttonCallback = (name: string) => {
     setActiveButton(name);
@@ -43,9 +50,9 @@ export default function CircularProgressWithLabel() {
 
   return (
     <Wrapper
-      title="SALES TARGET"
-      subtitle={subtitle} // Use the fetched subtitle
-      date={date} // Use the fetched date
+      title={title}
+      subtitle={subtitle}
+      date={date}
       buttonNa={buttonNames}
       buttonCallback={buttonCallback}
     >
@@ -84,4 +91,5 @@ export default function CircularProgressWithLabel() {
       </div>
     </Wrapper>
   );
-}
+};
+export default CircularProgressWithLabel;

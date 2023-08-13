@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GridLayout from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -10,6 +10,8 @@ import ProfileInfo from "@/components/Profile/ProfileInfo";
 import TextArea from "@/components/TextArea/TextArea";
 import TableData from "@/components/DataGrid/TableData";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import TextSection from "@/components/TextArea/TextSection";
+import Navbar from "@/components/Navbar/Navbar";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface WidgetConfig {
@@ -20,70 +22,61 @@ interface WidgetConfig {
   width: number;
   height: number;
   priority: number;
+  url: string;
+  title: string;
 }
 
 const Dashboard: React.FC = () => {
-  // const initialLayout: GridLayout.Layout[] = [
-  //   { i: "Welcome", x: 0, y: 0, w: 11, h: 1 },
-  //   { i: "box2", x: 0, y: 1, w: 4, h: 2 },
-  //   { i: "box3", x: 4, y: 1, w: 4, h: 2 },
-  //   { i: "ProfileInfo", x: 8, y: 1, w: 4, h: 2 },
-  //   { i: "box5", x: 0, y: 4, w: 4, h: 2 },
-  //   { i: "box6", x: 4, y: 4, w: 4, h: 1 },
-  //   { i: "ChartPie", x: 8, y: 5, w: 4, h: 5 },
-  //   { i: "TableData", x: 0, y: 6, w: 8, h: 2 },
-  //   { i: "CircularResult", x: 8, y: 11, w: 4, h: 2 },
-  // ];
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
 
-  // const widgetConfig: WidgetConfig[] = [
-  //   {
-  //     type: "Welcome",
-  //     order: 1,
-  //     col: 0,
-  //     row: 0,
-  //     width: 12,
-  //     height: 1,
-  //     priority: 2,
-  //   },
-  //   {
-  //        type: "ProfileInfo",
-  //     order: 2,
-  //     col: 1,
-  //     row: 8,
-  //     width: 4,
-  //     height: 2,
-  //     priority: 1,
-  //   },
-  //   {
-  //     type: "ChartPie",
-  //     order: 2,
-  //     col: 5,
-  //     row: 8,
-  //     width: 4,
-  //     height: 5,
-  //     priority: 3,
-  //   },
-  //   // ... define other widgets here
-  // ];
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const widgetConfig: WidgetConfig[] = [
     {
       type: "Welcome",
       order: 1,
-      col: 0,
+      col: 1,
       row: 0,
       width: 18,
-      height: 2,
+      height: 1,
       priority: 1,
+      title: "Welcome",
+      url: "",
+    },
+
+    {
+      type: "TextSection",
+      order: 3,
+      col: 1,
+      row: 0,
+      width: 12,
+      height: windowWidth > 760 ? 5 : 9,
+      priority: 3,
+      title: "Repairs",
+      url: "https://run.mocky.io/v3/9b974211-a383-4518-9f88-f3b737e9ed5f",
     },
     {
       type: "TableData",
       order: 2,
-      col: 11,
+      col: 7,
       row: 0,
       width: 12,
-      height: 8,
-      priority: 2,
+      height: 9,
+      priority: 4,
+      title: "TableData",
+      url: "",
     },
     {
       type: "ProfileInfo",
@@ -91,17 +84,21 @@ const Dashboard: React.FC = () => {
       col: 1,
       row: 12,
       width: 6,
-      height: 2,
-      priority: 3,
+      height: 3,
+      priority: 5,
+      title: "ProfileInfo",
+      url: "",
     },
     {
       type: "ChartPie",
       order: 2,
-      col: 5,
+      col: 4,
       row: 12,
       width: 6,
       height: 6,
-      priority: 4,
+      priority: 6,
+      title: "How did you hear about us?",
+      url: "",
     },
     {
       type: "CircularWithValueLabel",
@@ -110,7 +107,9 @@ const Dashboard: React.FC = () => {
       row: 12,
       width: 6,
       height: 5,
-      priority: 5,
+      priority: 7,
+      title: "Sales",
+      url: "",
     },
     // ... define other widgets here
   ];
@@ -124,7 +123,7 @@ const Dashboard: React.FC = () => {
   }));
   const componentsMapping: Record<string, React.ComponentType<any>> = {
     Welcome: Welcome,
-    TextArea: TextArea,
+    TextSection: TextSection,
     ChartPie: ChartPie,
     ProfileInfo: ProfileInfo,
     TableData: TableData,
@@ -149,24 +148,30 @@ const Dashboard: React.FC = () => {
           h: widget.height,
         }}
       >
-        <WidgetComponent />
+        <WidgetComponent
+          title={widget.title}
+          url={widget.url}
+          key={widget.title}
+        />
       </div>
     );
   });
 
   return (
-    <div className="px-5">
-      <ResponsiveGridLayout
-        layouts={{ lg: initialLayout }}
-        breakpoints={{ lg: 1200, md: 996, sm: 849, xs: 480, xxs: 0 }}
-        cols={{ lg: 19, md: 19, sm: 19, xs: 5, xxs: 1 }}
-        // cols={19}
-        rowHeight={70}
-        isDraggable={false}
-      >
-        {renderedWidgets}
-      </ResponsiveGridLayout>
-    </div>
+    <>
+      <div className="px-5 my-20">
+        <ResponsiveGridLayout
+          layouts={{ lg: initialLayout }}
+          breakpoints={{ lg: 1200, md: 996, sm: 849, xs: 480, xxs: 0 }}
+          cols={{ lg: 19, md: 19, sm: 19, xs: 5, xxs: 1 }}
+          // cols={19}
+          rowHeight={70}
+          isDraggable={false}
+        >
+          {renderedWidgets}
+        </ResponsiveGridLayout>
+      </div>
+    </>
   );
 };
 

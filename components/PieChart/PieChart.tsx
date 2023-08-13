@@ -6,6 +6,7 @@ import Loader from "../Loader/Loader";
 import { useState, useEffect } from "react";
 
 interface ChartPieProps {
+  title: string;
   url?: string;
 }
 
@@ -29,7 +30,7 @@ const buttonNamesURL: Record<string, string> = {
 
 const buttonNames = ["LAST WEEK", "LAST TWO WEEKS", "LAST MONTH"];
 
-const ChartPie: React.FC<ChartPieProps> = ({ url }) => {
+const ChartPie: React.FC<ChartPieProps> = ({ title, url }) => {
   const [activeButton, setActiveButton] = useState<string>(buttonNames[0]);
 
   const buttonCallback = (name: string) => {
@@ -63,7 +64,7 @@ const ChartPie: React.FC<ChartPieProps> = ({ url }) => {
 
   return (
     <Wrapper
-      title="HOW DID YOU HEAR ABOUT US?"
+      title={title}
       subtitle={subtitle}
       date={date ?? ""}
       buttonNa={buttonNames}

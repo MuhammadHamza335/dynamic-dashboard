@@ -4,10 +4,11 @@ import Logo from "../../public/images/mobile company.png";
 import LinearProgressBar from "./LinearProgressBar";
 
 interface ProfileInfoProps {
-  width?: number;
+  title: string;
+  url: string;
 }
 
-const ProfileInfo: React.FC<ProfileInfoProps> = ({ width }) => {
+const ProfileInfo: React.FC<ProfileInfoProps> = ({ title, url }) => {
   //   const containerWidth = width ?? 300;
   useEffect(() => {
     console.log("useEffect profileInfo");
@@ -18,7 +19,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ width }) => {
       //   style={{ width: `${containerWidth}px` }}
     >
       <Image src={Logo} width={170} height={100} alt="Logo" />
-      <p className="font-bold text-black">Store Profile</p>
+      <p className="font-bold text-black">{title}</p>
       <LinearProgressBar curretValue={45} />
       <p className="text-sm text-green-400 underline cursor-pointer">
         Complete your profile

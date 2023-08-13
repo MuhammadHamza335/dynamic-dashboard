@@ -6,6 +6,10 @@ import { useQuery } from "react-query";
 import Loader from "../Loader/Loader";
 import { useState, useEffect } from "react";
 
+interface TableDataProps {
+  title?: string;
+  url?: string;
+}
 const buttonNamesURL: Record<string, string> = {
   TODAY: "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716",
   "THIS MONTH": "https://run.mocky.io/v3/2dd54dda-3950-47f8-9be3-78a0cfabdfc1",
@@ -13,24 +17,7 @@ const buttonNamesURL: Record<string, string> = {
 };
 const buttonsTitle = ["TICKET", "APPOINTMENT"];
 const buttonNa = ["TODAY", "THIS MONTH", "LAST MONTH"];
-const TableData = () => {
-  // const {
-  //   data: rows,
-  //   isLoading,
-  //   isError,
-  // } = useQuery("tableData", async () => {
-  //   const response = await fetch(
-  //     "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716"
-  //   );
-  //   if (!response.ok) {
-  //     throw new Error("Network response was not ok");
-  //   }
-  //   return response.json();
-  // });
-
-  // if (isError) {
-  //   return <div>Error fetching data</div>;
-  // }
+const TableData: React.FC<TableDataProps> = ({ title, url }) => {
   const [activeButton, setActiveButton] = useState<string>(buttonNa[0]);
   const [activeCategory, setActiveCategory] = useState<string>(buttonsTitle[0]);
   const buttonCallback = (name: string) => {
