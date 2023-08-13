@@ -65,10 +65,10 @@ const CircularProgressWithLabel: React.FC<ProgressCicularProps> = ({
         ) : isError ? (
           <div>Error fetching data</div>
         ) : (
-          <div className="relative inline-flex">
+          <div className="relative inline-flex text-gray-300">
             <CircularProgress
               variant="determinate"
-              className="text-gray-200"
+              className="text-gray-300"
               size={190}
               thickness={5}
               value={100}
