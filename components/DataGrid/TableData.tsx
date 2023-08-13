@@ -8,18 +8,21 @@ import { useState, useEffect } from "react";
 
 interface TableDataProps {
   title?: string;
-  url?: string;
+  url: string;
 }
-const buttonNamesURL: Record<string, string> = {
-  TODAY: "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716",
-  "THIS MONTH": "https://run.mocky.io/v3/2dd54dda-3950-47f8-9be3-78a0cfabdfc1",
-  "LAST MONTH": "https://run.mocky.io/v3/a75de462-9474-4738-a914-409245424596",
-};
+
 const buttonsTitle = ["TICKET", "APPOINTMENT"];
 const buttonNa = ["TODAY", "THIS MONTH", "LAST MONTH"];
 const TableData: React.FC<TableDataProps> = ({ title, url }) => {
   const [activeButton, setActiveButton] = useState<string>(buttonNa[0]);
   const [activeCategory, setActiveCategory] = useState<string>(buttonsTitle[0]);
+  const buttonNamesURL: Record<string, string> = {
+    TODAY: url,
+    "THIS MONTH":
+      "https://run.mocky.io/v3/2dd54dda-3950-47f8-9be3-78a0cfabdfc1",
+    "LAST MONTH":
+      "https://run.mocky.io/v3/a75de462-9474-4738-a914-409245424596",
+  };
   const buttonCallback = (name: string) => {
     if (buttonNa.includes(name)) {
       setActiveButton(name);

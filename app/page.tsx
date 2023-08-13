@@ -7,11 +7,9 @@ import CircularWithValueLabel from "@/components/CicularProgressWithValue/Circul
 import Welcome from "@/components/Header/Welcome";
 import ChartPie from "@/components/PieChart/PieChart";
 import ProfileInfo from "@/components/Profile/ProfileInfo";
-import TextArea from "@/components/TextArea/TextArea";
 import TableData from "@/components/DataGrid/TableData";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import TextSection from "@/components/TextArea/TextSection";
-import Navbar from "@/components/Navbar/Navbar";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface WidgetConfig {
@@ -76,7 +74,7 @@ const Dashboard: React.FC = () => {
       height: 9,
       priority: 4,
       title: "TableData",
-      url: "",
+      url: "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716",
     },
     {
       type: "ProfileInfo",
@@ -98,7 +96,7 @@ const Dashboard: React.FC = () => {
       height: 6,
       priority: 6,
       title: "How did you hear about us?",
-      url: "",
+      url: "https://run.mocky.io/v3/3b9b6aa7-b7f2-432b-92ad-f7f33693db99",
     },
     {
       type: "CircularWithValueLabel",
@@ -109,7 +107,7 @@ const Dashboard: React.FC = () => {
       height: 5,
       priority: 7,
       title: "Sales",
-      url: "",
+      url: "https://run.mocky.io/v3/51dca2cc-5b17-4ad3-aabf-90dc7138a193",
     },
   ];
 
@@ -163,7 +161,6 @@ const Dashboard: React.FC = () => {
           layouts={{ lg: initialLayout }}
           breakpoints={{ lg: 1200, md: 996, sm: 849, xs: 480, xxs: 0 }}
           cols={{ lg: 19, md: 19, sm: 19, xs: 5, xxs: 1 }}
-          // cols={19}
           rowHeight={70}
           isDraggable={false}
         >

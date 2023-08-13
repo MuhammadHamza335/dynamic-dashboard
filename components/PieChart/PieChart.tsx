@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 interface ChartPieProps {
   title: string;
-  url?: string;
+  url: string;
 }
 
 interface PieData {
@@ -21,18 +21,17 @@ interface ApiResponse {
   data: PieData[];
 }
 
-const buttonNamesURL: Record<string, string> = {
-  "LAST WEEK": "https://run.mocky.io/v3/3b9b6aa7-b7f2-432b-92ad-f7f33693db99",
-  "LAST TWO WEEKS":
-    "https://run.mocky.io/v3/538ea4e4-bf61-4981-a458-6699f4de4861",
-  "LAST MONTH": "https://run.mocky.io/v3/44d1b329-0ed6-4327-826a-f929db80b293",
-};
-
 const buttonNames = ["LAST WEEK", "LAST TWO WEEKS", "LAST MONTH"];
 
 const ChartPie: React.FC<ChartPieProps> = ({ title, url }) => {
   const [activeButton, setActiveButton] = useState<string>(buttonNames[0]);
-
+  const buttonNamesURL: Record<string, string> = {
+    "LAST WEEK": url,
+    "LAST TWO WEEKS":
+      "https://run.mocky.io/v3/538ea4e4-bf61-4981-a458-6699f4de4861",
+    "LAST MONTH":
+      "https://run.mocky.io/v3/44d1b329-0ed6-4327-826a-f929db80b293",
+  };
   const buttonCallback = (name: string) => {
     setActiveButton(name);
   };

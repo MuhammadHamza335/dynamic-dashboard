@@ -12,13 +12,9 @@ import Loader from "../Loader/Loader";
 // }
 interface ProgressCicularProps {
   title: string;
-  url?: string;
+  url: string;
 }
-const buttonNamesURL: Record<string, string> = {
-  TODAY: "https://run.mocky.io/v3/51dca2cc-5b17-4ad3-aabf-90dc7138a193",
-  "THIS MONTH": "https://run.mocky.io/v3/4e23786c-39c1-4d6a-a05c-97de60edba3b",
-  "LAST MONTH": "https://run.mocky.io/v3/816b781e-c969-4528-a350-d35ef7665a7e",
-};
+
 const buttonNames = ["TODAY", "THIS MONTH", "LAST MONTH"];
 
 const CircularProgressWithLabel: React.FC<ProgressCicularProps> = ({
@@ -26,6 +22,13 @@ const CircularProgressWithLabel: React.FC<ProgressCicularProps> = ({
   url,
 }) => {
   const [activeButton, setActiveButton] = useState<string>(buttonNames[0]);
+  const buttonNamesURL: Record<string, string> = {
+    TODAY: url,
+    "THIS MONTH":
+      "https://run.mocky.io/v3/4e23786c-39c1-4d6a-a05c-97de60edba3b",
+    "LAST MONTH":
+      "https://run.mocky.io/v3/816b781e-c969-4528-a350-d35ef7665a7e",
+  };
   const buttonCallback = (name: string) => {
     setActiveButton(name);
   };
