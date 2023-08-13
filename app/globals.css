@@ -33,6 +33,6 @@ body {
 }
 .wrapper {
   padding: 20px;
-  border: 1px rgb(155, 3, 3);
+  border: 1px;
   display: inline-block; /* Only take the width and height of its content */
 }

@@ -2,52 +2,68 @@
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
+import { useQuery } from "react-query";
+import Loader from "../Loader/Loader";
+import { useState, useEffect } from "react";
 
+const buttonNamesURL: Record<string, string> = {
+  TODAY: "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716",
+  "THIS MONTH": "https://run.mocky.io/v3/2dd54dda-3950-47f8-9be3-78a0cfabdfc1",
+  "LAST MONTH": "https://run.mocky.io/v3/a75de462-9474-4738-a914-409245424596",
+};
 const buttonsTitle = ["TICKET", "APPOINTMENT"];
 const buttonNa = ["TODAY", "THIS MONTH", "LAST MONTH"];
 const TableData = () => {
-  const rows: GridRowsProp = [
-    {
-      id: 1,
-      col1: "Hello",
-      col2: "World",
-      col3: "Mark",
-      col4: " M Zeshan",
-      col5: "cancelled",
-    },
-    {
-      id: 2,
-      col1: "MUI X",
-      col2: "is awesome",
-      col3: "Mark",
-      col4: " Hamza",
-      col5: "pending",
-    },
-    {
-      id: 3,
-      col1: "Material UI",
-      col2: "is amazing",
-      col3: "Mark",
-      col4: " Usama",
-      col5: "done",
-    },
-    {
-      id: 4,
-      col1: "MUI",
-      col2: "HI",
-      col3: "Mark",
-      col4: " Ibrahim",
-      col5: "done",
-    },
-  ];
+  // const {
+  //   data: rows,
+  //   isLoading,
+  //   isError,
+  // } = useQuery("tableData", async () => {
+  //   const response = await fetch(
+  //     "https://run.mocky.io/v3/4a31d4f8-bb12-48e2-b3f4-0c608c4ee716"
+  //   );
+  //   if (!response.ok) {
+  //     throw new Error("Network response was not ok");
+  //   }
+  //   return response.json();
+  // });
 
+  // if (isError) {
+  //   return <div>Error fetching data</div>;
+  // }
+  const [activeButton, setActiveButton] = useState<string>(buttonNa[0]);
+  const [activeCategory, setActiveCategory] = useState<string>(buttonsTitle[0]);
+  const buttonCallback = (name: string) => {
+    if (buttonNa.includes(name)) {
+      setActiveButton(name);
+    } else {
+      setActiveCategory(name);
+    }
+  };
+  const {
+    data: rows,
+    isLoading,
+    isError,
+    refetch, // React Query's refetch function
+  } = useQuery<any>(activeButton + "TableData", async () => {
+    const response = await fetch(buttonNamesURL[activeButton]);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [activeButton, refetch]);
   const columns: GridColDef[] = [
     {
       field: "id",
-      renderHeader: () => <strong>{"Ticket"}</strong>,
+      renderHeader: () => <strong>{activeCategory}</strong>,
       renderCell: (params) => (
         <div className="text-cyan-500">{params.value}</div>
       ),
+      flex: 1,
     },
     {
       field: "col1",
@@ -55,7 +71,7 @@ const TableData = () => {
       renderCell: (params) => (
         <div className="text-cyan-500">{params.value}</div>
       ),
-      flex: 1, // Set flex property to distribute space evenly
+      flex: 1,
     },
     {
       field: "col2",
@@ -99,19 +115,29 @@ const TableData = () => {
 
   return (
     <div className="bg-white">
-      <div className="flex items-center bg-slate-100  justify-between ">
-        <ButtonGroup buttons={buttonsTitle} isLarge={true} />
-        <ButtonGroup buttons={buttonNa} />
-      </div>
-      <Box sx={{ width: "100%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          sx={{
-            boxShadow: 2,
-          }}
+      <div className=" space-y-3 items-center bg-slate-100  justify-between md:flex-row xs:flex-col  md:flex">
+        <ButtonGroup
+          buttons={buttonsTitle}
+          isLarge={true}
+          buttonCallback={buttonCallback}
         />
-      </Box>
+        <ButtonGroup buttons={buttonNa} buttonCallback={buttonCallback} />
+      </div>
+      {isLoading ? (
+        <div className=" flex flex-col bg-white">
+          <Loader />
+        </div>
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            sx={{
+              boxShadow: 2,
+            }}
+          />
+        </Box>
+      )}
     </div>
   );
 };

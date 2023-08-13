@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Welcome = () => {
+  useEffect(() => {
+    console.log("useEffect Welcome");
+  }, []);
   return (
     <div className="flex justify-between bg-white px-3 flex-wrap ">
       <div className="text-black font-bold text-lg my-5">Welcome User!</div>

@@ -3,13 +3,16 @@ import React, { useState } from "react";
 interface Props {
   buttons: string[];
   isLarge?: boolean; // Add the optional isLarge prop
+  // buttonCallback: (name: string) => void;
+  buttonCallback: any;
 }
 
-const ButtonGroup: React.FC<Props> = ({ buttons, isLarge }) => {
+const ButtonGroup: React.FC<Props> = ({ buttons, isLarge, buttonCallback }) => {
   const [activeButton, setActiveButton] = useState(buttons[0]);
   const disabledButtons = buttons.slice(1);
 
   const handleButtonClick = (buttonName: string) => {
+    buttonCallback(buttonName);
     setActiveButton(buttonName);
   };
 
